@@ -2,6 +2,8 @@
 
 set -e
 
+npm run build
+
 rm -rf target
 mkdir -p target/data/webapps/usr-bili-danmu
 cp -r build/* target/data/webapps/usr-bili-danmu
