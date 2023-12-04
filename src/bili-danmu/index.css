@@ -1,8 +1,17 @@
+.page {
+    overflow-y: scroll
+}
+
 .avatar-img {
     max-width: 36px;
     max-height: 36px;
+    background-position: center;
+    background-size: 36px;
+    border-radius: 100%;
 }
 
 .danmu-font {
     font-size: 36px;
+    color: aliceblue;
+    overflow: scroll;
 }

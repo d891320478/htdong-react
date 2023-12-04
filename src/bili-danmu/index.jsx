@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
+import React, { useEffect, useRef, useState } from 'react';
+import useWebSocket from 'react-use-websocket';
 import './index.css';
 
 function BiliDanmu() {
@@ -9,24 +9,34 @@ function BiliDanmu() {
     const roomId = params.get('roomId');
     const { lastMessage } = useWebSocket("ws://" + window.location.host + "/bili-danmu/danmuList?roomId=" + roomId);
 
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: "end", inline: "nearest" })
+    }
+
     useEffect(() => {
         if (lastMessage !== null) {
-            setMsgList(preMsgList => preMsgList.concat(JSON.parse(lastMessage.data)));
-            if (msgList.length > 30) {
-                setMsgList(msgList.slice(msgList.length - 30, msgList.length));
-            }
+            setMsgList(JSON.parse(lastMessage.data));
         };
+        scrollToBottom()
     }, [lastMessage, setMsgList]);
 
     return (
         <div>
-            <ul>
-                {msgList.map((msg, index) => (
-                    <li key="{index}" className='danmu-font'>
-                        <img src={msg.avatar} className="avatar-img" /> {msg.name}: {msg.content}
-                    </li>
-                ))}
-            </ul>
+            {
+                msgList.map((msg, index) => (
+                    msg.sc ?
+                        <div key="{index}" className='danmu-font'>
+                            <img src={msg.avatar} className="avatar-img" /> [SC] {msg.name} {msg.content}
+                        </div>
+                        :
+                        <div key="{index}" className='danmu-font'>
+                            <img src={msg.avatar} className="avatar-img" /> {msg.name} {msg.content}
+                        </div>
+                ))
+            }
+            <div ref={messagesEndRef} />
         </div>
     );
 }
