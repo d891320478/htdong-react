@@ -22,21 +22,29 @@ function BiliDanmu() {
         scrollToBottom()
     }, [lastMessage, setMsgList]);
 
+    useEffect(() => {
+        scrollToBottom()
+    }, [])
+
     return (
-        <div>
+        <div ref={messagesEndRef}>
             {
                 msgList.map((msg, index) => (
-                    msg.sc ?
-                        <div key="{index}" className='danmu-font'>
-                            <img src={msg.avatar} className="avatar-img" /> [SC] {msg.name} {msg.content}
+                    msg.empty ?
+                        <div key="{index}" className='danmu-font' ref={messagesEndRef}>
+                            <div>{msg.content == "" ? '\u00A0' : msg.content}</div>
                         </div>
                         :
-                        <div key="{index}" className='danmu-font'>
-                            <img src={msg.avatar} className="avatar-img" /> {msg.name} {msg.content}
-                        </div>
+                        msg.sc ?
+                            <div key="{index}" className='danmu-font' ref={messagesEndRef}>
+                                <img src={msg.avatar} className="avatar-img" /> [SC] {msg.name} {msg.content}
+                            </div>
+                            :
+                            <div key="{index}" className='danmu-font' ref={messagesEndRef}>
+                                <img src={msg.avatar} className="avatar-img" /> {msg.name} {msg.content}
+                            </div>
                 ))
             }
-            <div ref={messagesEndRef} />
         </div>
     );
 }
