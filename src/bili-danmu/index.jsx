@@ -23,11 +23,20 @@ function BiliDanmu() {
     }, [lastMessage, setMsgList]);
 
     useEffect(() => {
-        scrollToBottom()
-    }, [])
+        let timer = null
+        function check() {
+            let dom = document.getElementById('page')
+            if (dom) {
+                scrollToBottom()
+            } else {
+                timer = setTimeout(check, 0)
+            }
+        }
+        check()
+    })
 
     return (
-        <div ref={messagesEndRef}>
+        <div ref={messagesEndRef} id="page">
             {
                 msgList.map((msg, index) => (
                     msg.empty ?
