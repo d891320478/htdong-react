@@ -44,17 +44,25 @@ function BiliDanmu() {
                             <div>{msg.content == "" ? '\u00A0' : msg.content}</div>
                         </div>
                         :
-                        msg.sc ?
+                        !msg.sc ?
                             <div key="{index}" className='danmu-font' ref={messagesEndRef}>
-                                <img src={msg.avatar} className="avatar-img" /> [SC] {msg.name} {msg.content}
+                                <div style={{ backgroundColor: "#00ffff" }}>
+                                    <img src={msg.avatar} className="avatar-img" />{msg.name}
+                                </div>
+                                <div style={{ backgroundColor: "#99ffff" }}>{msg.content}</div>
                             </div>
                             :
-                            <div key="{index}" className='danmu-font' ref={messagesEndRef}>
-                                <img src={msg.avatar} className="avatar-img" /> {msg.name} {msg.content}
-                            </div>
+                            msg.type == 1 ?
+                                <div key="{index}" className='danmu-font' ref={messagesEndRef}>
+                                    <img src={msg.avatar} className="avatar-img" /> {msg.name} <img src={msg.emoticonUrl} className="emoticon-img" />
+                                </div>
+                                :
+                                <div key="{index}" className='danmu-font' ref={messagesEndRef}>
+                                    <img src={msg.avatar} className="avatar-img" /> {msg.name} {msg.content}
+                                </div>
                 ))
             }
-        </div>
+        </div >
     );
 }
 
