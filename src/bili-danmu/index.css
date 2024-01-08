@@ -2,6 +2,10 @@
     overflow-y: scroll
 }
 
+.emoticon-img {
+    max-height: 40px;
+}
+
 .avatar-img {
     max-width: 40px;
     max-height: 40px;
@@ -10,12 +14,36 @@
     border-radius: 100%;
 }
 
-.emoticon-img {
-    max-height: 40px;
-}
-
 .danmu-font {
     font-size: 40px;
     color: aliceblue;
+    overflow: scroll;
+}
+
+.avatar-img-gift {
+    max-width: 40px;
+    max-height: 40px;
+    background-position: center;
+    background-size: 40px;
+    border-radius: 100%;
+    margin: auto;
+}
+
+.gift-font {
+    background-position: center;
+    font-size: 40px;
+    max-height: 64px;
+    height: 98%;
+    width: 95%;
+    margin: auto;
+    overflow: scroll;
+    color: aliceblue;
+    background-color: #2ceb9b;
+    border-radius: 5px;
+}
+
+.sc-danmu-font {
+    font-size: 40px;
+    color: black;
     overflow: scroll;
 }
